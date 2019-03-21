@@ -22,7 +22,7 @@ def face_detection():
     cv2.namedWindow("test")
     cap=cv2.VideoCapture(0)
     success,frame=cap.read()
-    classifier=cv2.CascadeClassifier("C:\Python34\Lib\site-packages\cv2\data\haarcascade_frontalface_alt.xml")
+    classifier=cv2.CascadeClassifier("haarcascade_frontalface_alt.xml")
     prelen = ''
     while success:
         success,frame=cap.read()
@@ -50,7 +50,7 @@ def face_detection():
                 for faceRect in faceRects:
                     x,y,w,h=faceRect
                     image = frame[y - 10: y + h + 10, x - 10: x + w + 10]
-                    cv2.imwrite('D:\\Queens\\fourth\\cisc499\\facetracking\\1.jpg', image)
+                    cv2.imwrite('1.jpg', image)
 
                     NAME = classify('1.jpg')
                     voice = TextToSpeech()
@@ -63,25 +63,20 @@ def face_detection():
                     if NAME == 'unknown people':
                         if tools.check_status() == False:
                             voice.play(voice.get_audio_bytes(
-                                'Hi'))  # using text to speech to ask: hey: I never meet you before. What's your name? Just say your name. I will remember you.
+                                'Hi'))  
                         else:
                             time = 0
-                            voice.play(voice.get_audio_bytes('I never meet you before. Can you spell your name? Just say your name. I will remember you. Make sure you are the only person that in front of me'))# using text to speech to ask: hey: I never meet you before. What's your name? Just say your name. I will remember you.
+                            voice.play(voice.get_audio_bytes('I never meet you before. Can you spell your name? Just say your name. I will remember you. Make sure you are the only person that in front of me'))
                             speaking = SpeechToText()
                             name = SpeechToText().record_to_file()
-                            voice.play(voice.get_audio_bytes('So, your name is ' + name + 'Is it right? Please answer yes or no.'))# using text to speech to ask: hey: I never meet you before. What's your name? Just say your name. I will remember you.
-                            answer = SpeechToText().record_to_file()
+                            voice.play(voice.get_audio_bytes('So, your name is ' + name + 'Is it right? Please answer yes or no.'))
                             while 'yes' not in answer:
-                                voice.play(voice.get_audio_bytes('Can you spell your name again?'))  # using text to speech to ask: hey: I never meet you before. What's your name? Just say your name. I will remember you.
-                                name = SpeechToText().record_to_file()
+                                voice.play(voice.get_audio_bytes('Can you spell your name again?')) 
                                 voice.play(voice.get_audio_bytes('So, your name is ' + name +
-                                                                 'Is it right? Please answer yes or no.'))  # using text to speech to ask: hey: I never meet you before. What's your name? Just say your name. I will remember you.
+                                                                 'Is it right? Please answer yes or no.')) 
                                 answer = SpeechToText().record_to_file()
                                 answer = answer[:-1]
-                                #print(type(answer))
-                                #print('yes' in answer)
-                                # using speech to text to remember the text
-                            #name = 'chen. '
+               
                             name = name.replace('.', '')
                             name = name.replace(' ', '')
                             # Take 10 photo of this guy, and turn it to file.
@@ -89,7 +84,7 @@ def face_detection():
 
                             while time <= 10:
                                 print('here')
-                                cv2.imwrite('D:\\Queens\\fourth\\cisc499\\facetracking\\final_version\\update\\' + str(time) + '.jpg', image)
+                                cv2.imwrite('YOU DIRECTORY\\update\\' + str(time) + '.jpg', image)
                                 time += 1
                             files = ['1.jpg','2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '0.jpg']
                             zip_file = name + '.zip'
@@ -97,14 +92,14 @@ def face_detection():
                             for file in files:
                                 os.remove(file)
                             os.chdir(r'D:\Queens\fourth\cisc499\facetracking\final_version')
-                            tools.update([zip_file])
+                            ##tools.update([zip_file])  # to update the classifier
                             os.remove('update//' + zip_file)
                             NAME_LIST.append(name)
 
 
                     else:
                         if NAME not in NAME_LIST:
-                            #voice.play(voice.get_audio_bytes('Hi,'+NAME))
+                            voice.play(voice.get_audio_bytes('Hi,'+NAME))
                             NAME_LIST.append(NAME)
 
 
