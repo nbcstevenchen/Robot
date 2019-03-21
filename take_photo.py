@@ -15,7 +15,7 @@ def take_photo():
         k = cv2.waitKey(1)
         if k == 27:
             break
-        cv2.imwrite('D:\\Queens\\fourth\\cisc499\\facetracking\\final_version\\update\\'+str(i) + '.jpg', frame1)
+        cv2.imwrite('YOU DIRECTORY\\update\\'+str(i) + '.jpg', frame1)
         i += 1
         cv2.imshow("capture", frame1)
     cap1.release()
@@ -31,8 +31,8 @@ def zip_files(files, zip_name):
     #os.chdir(r'D:\Queens\fourth\cisc499\facetracking\final_version')
     #print('compressing finished')
 
-#files = ['1.jpg','2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg','12.jpg', '13.jpg']#文件的位置，多个文件用“，”隔开
-#zip_file = 'pppp.zip'#压缩包名字
+#files = ['1.jpg','2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg', '10.jpg', '11.jpg','12.jpg', '13.jpg']
+#zip_file = 'pppp.zip'
 #zip_files(files, zip_file)
 #take_photo()
 
