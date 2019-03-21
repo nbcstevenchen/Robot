@@ -80,7 +80,6 @@ def face_detection():
                             name = name.replace('.', '')
                             name = name.replace(' ', '')
                             # Take 10 photo of this guy, and turn it to file.
-                            #take_photo.take_photo()
 
                             while time <= 10:
                                 print('here')
