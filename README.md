@@ -28,4 +28,12 @@ sudo apt-get install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp
 sudo apt-get install ffmpeg libav-tools
 Sudo pip install pyaudio
 
+NAME of MySQL database: cisc499
+create table conversation(
+id varchar(100) primary key,
+name varchar(100),
+date int(100),
+text varchar(10000))engine=innodb default charset=utf8;
+
+
 
