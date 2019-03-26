@@ -17,7 +17,7 @@ sysname = platform.system()
 
 
 const.INI_DB_CONFIG_USER = 'root'
-const.INI_DB_CONFIG_PASSWORD = 'chenyuhao1996'
+const.INI_DB_CONFIG_PASSWORD = ''
 const.INI_DB_CONFIG_HOST = 'localhost'
 const.INI_DB_CONFIG_PORT = '3306'
 const.INI_DB_CONFIG_DATABASE = 'cisc499'
