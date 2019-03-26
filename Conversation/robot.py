@@ -11,7 +11,7 @@ def start_robot(boolean, name=None):
         flag = True
         while flag:
             try:
-                print('111111111111')
+                #print('111111111111')
                 speaking = SpeechToText()
                 start_speechtotext = datetime.now()
                 input_sentence = SpeechToText().record_to_file(boolean)
@@ -19,7 +19,8 @@ def start_robot(boolean, name=None):
                 if input_sentence == False:
                     break
                 if name != None:
-                    db.sql_command(name, input_sentence)
+                    #db.sql_command(name, input_sentence)
+                    pass
                 end_speechtotext = datetime.now()
                 print(input_sentence)
                 start_chat = datetime.now()
