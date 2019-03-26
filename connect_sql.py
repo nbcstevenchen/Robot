@@ -24,20 +24,20 @@ class DataBase:
         for number in cursor:
             if number[0] == 0 :
                 id = str(uuid.uuid4()).replace('-', '')
-                insert = 'insert ignore into conversation(id, name, number_time, text) values(' \
+                insert = 'insert ignore into conversation(id, name, date, text) values(' \
                     '%s, %s,CURDATE(), %s )'
                 cursor.execute(insert, (id, name, text))
             else:
                 cursor.execute('select text from conversation where name = "%s"' % name)
                 for txt in cursor:
                     oldtext = txt[0]
-                cursor.execute('select number_time from conversation where name = "%s"' % name)
+                cursor.execute('select date from conversation where name = "%s"' % name)
                 for sub in cursor:
                     if sub[0]+3 > current_time:
                         newtext = oldtext + ' ' + text
-                        cursor.execute('UPDATE conversation SET text = "%s", number_time = "%s" where name = "%s"'%(newtext, current_time, name))
+                        cursor.execute('UPDATE conversation SET text = "%s", date = "%s" where name = "%s"'%(newtext, current_time, name))
                     else:
-                        cursor.execute('UPDATE conversation SET text = "%s", number_time = "%s" where name = "%s"' % (
+                        cursor.execute('UPDATE conversation SET text = "%s", date = "%s" where name = "%s"' % (
                         text, current_time, name))
 
 
