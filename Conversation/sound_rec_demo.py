@@ -9,6 +9,7 @@ import pyaudio
 from watson_developer_cloud import SpeechToTextV1
 from datetime import datetime
 import json
+from datetime import datetime
 
 
 class SpeechToText():
@@ -68,7 +69,7 @@ class SpeechToText():
         r.extend([0 for i in range(int(seconds*self.rate))])
         return r
 
-    def record(self):
+    def record(self, stop=True):
         """
         Record a word or words from the microphone and
         return the data as an array of signed shorts.
@@ -86,7 +87,7 @@ class SpeechToText():
         snd_started = False
 
         r = array('h')
-
+        start = datetime.now()
         while True:
             # little endian, signed short
             snd_data = array('h', stream.read(self.chunk_size))
@@ -95,7 +96,11 @@ class SpeechToText():
             r.extend(snd_data)
 
             silent = self.is_silent(snd_data)
-
+            if stop == False:
+                if silent and not snd_started:
+                    end = datetime.now()
+                    if (end - start).seconds > 1:
+                        return False,False
             if silent and snd_started:
                 num_silent += 1
             elif not silent and not snd_started:
@@ -114,10 +119,12 @@ class SpeechToText():
         r = self.add_silence(r, 0.5)
         return sample_width, r
 
-    def record_to_file(self):
+    def record_to_file(self, boolean):
         "Records from the microphone and outputs the resulting data to 'path'"
         start_h = datetime.now()
-        sample_width, data = self.record()
+        sample_width, data = self.record(stop=boolean)
+        if data == False:
+            return False
         data = pack('<' + ('h'*len(data)), *data)
         f = BytesIO(data)
         end_h = datetime.now()
@@ -137,6 +144,8 @@ class SpeechToText():
             return speech_recognition_results["results"][0]["alternatives"][0]["transcript"]
         except:
             return json.dumps(speech_recognition_results, indent=2)
+
+
 
 
     #if __name__ == '__main__':
