@@ -29,7 +29,7 @@ sudo apt-get install ffmpeg libav-tools
 Sudo pip install pyaudio
 
 NAME of MySQL database: cisc499
-create table conversation( \n
+create table conversation(<br>
 id varchar(100) primary key,
 name varchar(100),
 date int(100),
